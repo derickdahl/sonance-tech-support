@@ -1,0 +1,291 @@
+{
+  "product": {
+    "sku": "93548",
+    "model": "UA 2-125 ARC",
+    "full_name": "UA 2-125 ARC DSP Amplifier",
+    "brand": "Sonance",
+    "category": "DSP Amplifier",
+    "description": "Ultra-compact 2-channel DSP amplifier with 125W per channel, HDMI eARC support, Bluetooth app setup, and flexible T-slot mounting"
+  },
+  "specifications": {
+    "channels": "2 (1 stereo pair)",
+    "power_8_ohms_stereo": "125W per channel",
+    "power_4_ohms_stereo": "125W per channel", 
+    "power_4_ohms_bridged": "250W (Power Sharing Mode)",
+    "frequency_response": "20Hz - 20kHz, +/- 0.5dB",
+    "thd": "<0.1% (1kHz, 100W, 4Ω or 8Ω)",
+    "signal_to_noise": ">100dB (20-20kHz, A-weighted)",
+    "inputs": "Analog RCA, HDMI ARC/eARC, COAX S/PDIF, Optical TOSLINK",
+    "outputs": "Analog RCA with volume tracking and DSP",
+    "digital_format": "2-channel PCM up to 24bit/96kHz",
+    "ac_voltage": "100-240Vac 50/60Hz",
+    "power_consumption_full": "300 Watts",
+    "power_consumption_idle": "8 Watts (active), 3 Watts (output off)",
+    "power_consumption_standby": "<0.5 Watt",
+    "product_dimensions": "5.35\" x 1.77\" x 8.19\" (136mm x 45mm x 208mm)",
+    "shipping_dimensions": "9.21\" x 5.03\" x 12.44\"",
+    "weight": "5.47 lbs (2.48 kg)"
+  },
+  "key_features": [
+    "2 Channel - 125W per channel at 8Ω or 4Ω",
+    "Power Share Mode - combines to 250W in 4Ω",
+    "HDMI eARC/CEC support for TV audio",
+    "Bluetooth-enabled SonARC app for wireless setup",
+    "Full DSP with EQ, crossover, delay, and limiting",
+    "Ultra-compact design for structured wiring cans or TV back boxes",
+    "Integrated heatsink chassis with T-slot mounting",
+    "IR learning capability",
+    "Audio Sense auto-on detection",
+    "HDMI CEC control"
+  ],
+  "app": {
+    "name": "SonARC for UA Series Amplifiers",
+    "platform": "iOS and Android",
+    "connection": "Bluetooth",
+    "features": [
+      "Input selection and configuration",
+      "Volume and balance control",
+      "EQ adjustment (bass, treble, parametric)",
+      "Crossover settings for subwoofer output",
+      "Power Sharing Mode toggle",
+      "IR learning setup",
+      "LED timeout settings",
+      "Firmware updates"
+    ]
+  },
+  "connections": {
+    "audio_inputs": {
+      "analog": "RCA stereo (L/R)",
+      "hdmi": "HDMI eARC/ARC with CEC",
+      "coax": "S/PDIF coaxial digital",
+      "toslink": "Optical digital"
+    },
+    "audio_outputs": {
+      "speaker": "2 channels, spring terminals, 4Ω minimum",
+      "line_out": "RCA stereo with volume tracking and DSP"
+    },
+    "control": {
+      "ir": "3.5mm IR input with learning capability",
+      "bluetooth": "BLE antenna for app setup"
+    }
+  },
+  "mounting_options": [
+    "Included surface mounting brackets (2x)",
+    "20mm series industry standard T-slots",
+    "Seismic tether mounting hole",
+    "DIN rail compatible with adapter"
+  ],
+  "warranty": {
+    "duration": "2 years limited",
+    "coverage": "Defective workmanship and materials"
+  },
+  "support": {
+    "phone": "(949) 492-7777",
+    "website": "www.sonance.com",
+    "address": "991 Calle Amanecer, San Clemente, CA 92673 USA"
+  },
+  "installation_topics": [
+    {
+      "topic": "app_setup",
+      "title": "SonARC App Setup",
+      "content": "Download the SonARC for UA Series Amplifiers app from the iOS App Store or Google Play Store. Power on the amplifier and ensure Bluetooth is enabled on your mobile device. Open the app and it will automatically detect nearby UA amplifiers. Select your amplifier to connect and configure settings."
+    },
+    {
+      "topic": "hdmi_arc_setup",
+      "title": "HDMI ARC/eARC Setup",
+      "content": "Connect the amplifier's HDMI port to the TV's ARC/eARC port using a high-speed HDMI cable. Enable ARC output in the TV's audio settings. Enable CEC in the TV settings for volume control. The amplifier will automatically detect and switch to HDMI input when TV audio is present."
+    },
+    {
+      "topic": "power_sharing_mode",
+      "title": "Power Sharing Mode",
+      "content": "Power Sharing Mode combines both channels into a single 250W output at 4Ω. Enable via the SonARC app under Power Settings. Use for driving a single high-power speaker or subwoofer. When enabled, the Left channel output becomes the combined output. Speaker must be 4Ω or higher impedance."
+    },
+    {
+      "topic": "ir_learning",
+      "title": "IR Learning Setup",
+      "content": "Connect an IR receiver to the 3.5mm IR input. In the SonARC app, go to IR Settings and select Learn. Point your remote at the IR receiver and press the button you want to learn. The amp can learn power, volume up/down, and mute commands from most IR remotes."
+    },
+    {
+      "topic": "mounting",
+      "title": "Mounting Options",
+      "content": "The UA 2-125 ARC includes surface mounting brackets for wall or cabinet mounting. The chassis features integrated T-slots compatible with 20mm series mounting hardware. A seismic tether hole is provided for earthquake-prone installations. Unit can be installed in structured wiring enclosures, TV back boxes, or equipment racks."
+    },
+    {
+      "topic": "ventilation",
+      "title": "Ventilation Requirements",
+      "content": "The integrated heatsink chassis dissipates heat efficiently but requires adequate airflow. Leave minimum 1 inch clearance around all sides. Do not install in enclosed spaces without ventilation. Maximum operating temperature is 40°C (104°F) ambient."
+    },
+    {
+      "topic": "speaker_wiring",
+      "title": "Speaker Connections",
+      "content": "Use minimum 16 AWG speaker wire (14 AWG recommended for long runs). Strip 3/8 inch of insulation. Press spring terminal and insert wire fully. Maintain correct polarity (+ to +, - to -) for proper phase. Minimum speaker impedance is 4Ω per channel."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "issue": "No Power",
+      "symptoms": "Status LED does not illuminate when AC cord is connected",
+      "causes_solutions": [
+        {
+          "cause": "AC cable is improperly seated at amp or outlet",
+          "solution": "Verify both ends of the power cable are securely seated"
+        },
+        {
+          "cause": "No AC current at the outlet",
+          "solution": "Test outlet with another device or try a different outlet"
+        },
+        {
+          "cause": "Amp is powered but in standby mode with LED timed out",
+          "solution": "Send audio signal to wake amp, or use SonARC app to set LED Timeout to Always On"
+        }
+      ]
+    },
+    {
+      "issue": "No Audio",
+      "symptoms": "Status LED is green but no sound from speakers",
+      "causes_solutions": [
+        {
+          "cause": "Source is not sending audio signal",
+          "solution": "Verify source is powered on, playing, and not muted"
+        },
+        {
+          "cause": "Audio cables not fully connected",
+          "solution": "With amp off, reseat all RCA connections at source and amp. Ensure cables are in INPUT terminals, not OUTPUT"
+        },
+        {
+          "cause": "Wrong input selected",
+          "solution": "Use SonARC app to verify correct input source is selected"
+        },
+        {
+          "cause": "Volume is too low",
+          "solution": "Use SonARC app or IR remote to increase volume"
+        }
+      ]
+    },
+    {
+      "issue": "One Channel Out",
+      "symptoms": "Only one speaker produces sound",
+      "causes_solutions": [
+        {
+          "cause": "Interconnect cable loose or faulty",
+          "solution": "Swap left and right cables to isolate if cable or source channel is the issue"
+        },
+        {
+          "cause": "Speaker wire disconnected or faulty",
+          "solution": "Check connections at amp and speaker. Test with known good speaker wire"
+        },
+        {
+          "cause": "Balance set to one side",
+          "solution": "Use SonARC app to reset balance to center"
+        }
+      ]
+    },
+    {
+      "issue": "Protection Mode",
+      "symptoms": "Status LED flashing RED",
+      "causes_solutions": [
+        {
+          "cause": "Amplifier is in over-temperature condition",
+          "solution": "Allow amp to cool. Ensure adequate ventilation. Reduce volume if driving speakers hard"
+        },
+        {
+          "cause": "Short circuit in speaker wiring",
+          "solution": "Disconnect speakers and check for shorts. Verify speaker impedance is 4Ω or higher"
+        },
+        {
+          "cause": "Speaker impedance too low",
+          "solution": "Ensure each channel is driving speakers with combined impedance of 4Ω or higher"
+        }
+      ]
+    },
+    {
+      "issue": "No HDMI Audio",
+      "symptoms": "TV connected via HDMI but no sound",
+      "causes_solutions": [
+        {
+          "cause": "TV ARC output not enabled",
+          "solution": "Enable ARC in TV audio settings. May be called 'Audio Output' or 'External Speakers'"
+        },
+        {
+          "cause": "CEC not enabled",
+          "solution": "Enable CEC/HDMI Control in TV settings for proper handshake"
+        },
+        {
+          "cause": "Wrong HDMI port on TV",
+          "solution": "Connect to the TV's HDMI ARC port (usually labeled)"
+        },
+        {
+          "cause": "HDMI cable not ARC capable",
+          "solution": "Use a high-speed HDMI cable that supports ARC/eARC"
+        }
+      ]
+    },
+    {
+      "issue": "App Won't Connect",
+      "symptoms": "SonARC app cannot find or connect to amplifier",
+      "causes_solutions": [
+        {
+          "cause": "Bluetooth not enabled on phone",
+          "solution": "Enable Bluetooth in phone settings"
+        },
+        {
+          "cause": "Amp in standby mode",
+          "solution": "Send audio signal to wake amp or power cycle"
+        },
+        {
+          "cause": "Too far from amplifier",
+          "solution": "Move closer to amp. Bluetooth range is approximately 30 feet"
+        },
+        {
+          "cause": "Another device connected",
+          "solution": "Only one device can connect via Bluetooth at a time. Disconnect other devices"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is Power Sharing Mode?",
+      "answer": "Power Sharing Mode combines both channels into a single 250W output at 4Ω. It's useful for driving a single high-power speaker or subwoofer. Enable it via the SonARC app."
+    },
+    {
+      "question": "Does the UA 2-125 ARC support Dolby or DTS?",
+      "answer": "No, the UA 2-125 ARC supports 2-channel PCM only. Your TV or source must be set to output PCM stereo. Dolby and DTS signals will not pass through."
+    },
+    {
+      "question": "Can I use the line outputs to connect a subwoofer?",
+      "answer": "Yes, the RCA line outputs include volume tracking and DSP. You can use the SonARC app to set up a crossover and send only low frequencies to a powered subwoofer connected to the line output."
+    },
+    {
+      "question": "What is the minimum speaker impedance?",
+      "answer": "4 ohms per channel minimum. In Power Sharing Mode, the combined speaker load must be 4 ohms or higher."
+    },
+    {
+      "question": "How do I update the firmware?",
+      "answer": "Firmware updates are delivered through the SonARC app. When an update is available, the app will notify you. Follow the prompts to install. Keep the app connected throughout the update process."
+    },
+    {
+      "question": "What's the difference between UA 2-125 and UA 2-125 ARC?",
+      "answer": "The UA 2-125 ARC includes HDMI ARC/eARC input and CEC control for TV audio. The standard UA 2-125 has analog and S/PDIF digital inputs only."
+    },
+    {
+      "question": "Can I control volume with my TV remote?",
+      "answer": "Yes, when connected via HDMI with CEC enabled, the TV remote's volume buttons will control the amplifier volume."
+    },
+    {
+      "question": "What is the warranty period?",
+      "answer": "The UA 2-125 ARC has a 2-year limited warranty covering defective workmanship and materials."
+    }
+  ],
+  "related_products": [
+    {"sku": "93547", "model": "UA 2-125", "description": "Same amp without HDMI ARC"},
+    {"sku": "93759", "model": "UA 2-125 Accessory", "description": "Compatible accessory"}
+  ],
+  "replaces": ["93091", "93542", "93543"],
+  "msrp": "$1000",
+  "document_urls": {
+    "datasheet": "https://images.salsify.com/image/upload/s--46P6h62M--/fl_attachment/zalkrjrqwcco7ysryexh.pdf",
+    "manual": "https://images.salsify.com/image/upload/s--AuMksXJ9--/fl_attachment/mebd1wpp3h9gciogn64l.pdf",
+    "quickstart": "https://images.salsify.com/image/upload/s--ueq2JJ2k--/fl_attachment/x1e8pyd4a3kjscuvla6m.pdf"
+  }
+}
