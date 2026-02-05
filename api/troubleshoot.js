@@ -1,109 +1,140 @@
-// Vercel Serverless Function - Troubleshooting lookup
-import { readFileSync, readdirSync } from 'fs';
-import { join } from 'path';
+// Vercel Serverless Function - Troubleshooting lookup (Supabase)
+import { createClient } from '@supabase/supabase-js';
 
-let products = {};
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-function loadProducts() {
-  if (Object.keys(products).length > 0) return products;
-  const productsDir = join(process.cwd(), 'products');
-  try {
-    const skus = readdirSync(productsDir);
-    for (const sku of skus) {
-      const knowledgePath = join(productsDir, sku, 'knowledge.json');
-      try {
-        products[sku] = JSON.parse(readFileSync(knowledgePath, 'utf-8'));
-      } catch (e) {}
-    }
-  } catch (e) {}
-  return products;
-}
-
-function findProduct(query) {
-  const prods = loadProducts();
-  const q = query.toLowerCase().trim();
-  if (prods[q]) return prods[q];
-  for (const [sku, data] of Object.entries(prods)) {
-    const model = data.product?.model?.toLowerCase() || '';
-    if (model.includes(q) || q.includes(model)) return data;
-  }
-  return null;
-}
-
-function searchTroubleshooting(product, issue) {
-  const troubleshooting = product.troubleshooting || [];
-  const q = issue.toLowerCase();
-  
-  // Score each troubleshooting entry
-  const scored = troubleshooting.map(t => {
-    let score = 0;
-    const issueText = t.issue?.toLowerCase() || '';
-    const symptoms = t.symptoms?.toLowerCase() || '';
-    
-    // Check for keyword matches
-    const keywords = q.split(/\s+/);
-    for (const kw of keywords) {
-      if (kw.length < 3) continue;
-      if (issueText.includes(kw)) score += 10;
-      if (symptoms.includes(kw)) score += 5;
-      
-      // Check causes/solutions
-      for (const cs of (t.causes_solutions || [])) {
-        if (cs.cause?.toLowerCase().includes(kw)) score += 3;
-        if (cs.solution?.toLowerCase().includes(kw)) score += 2;
-      }
-    }
-    return { ...t, score };
-  });
-  
-  // Return top matches
-  return scored.filter(t => t.score > 0).sort((a, b) => b.score - a.score);
-}
-
-export default function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
   if (req.method === 'OPTIONS') return res.status(200).end();
+  
+  try {
+    // Handle VAPI format
+    let sku, issue;
+    
+    if (req.body?.message?.toolCallList?.[0]) {
+      // VAPI format
+      const toolCall = req.body.message.toolCallList[0];
+      const args = toolCall.function?.arguments || toolCall.input || toolCall.arguments || {};
+      const parsedArgs = typeof args === 'string' ? JSON.parse(args) : args;
+      sku = parsedArgs.sku;
+      issue = parsedArgs.issue;
+      
+      // Process and return VAPI format
+      const result = await searchTroubleshooting(sku, issue);
+      return res.json({
+        results: [{
+          toolCallId: toolCall.id,
+          result: result
+        }]
+      });
+    } else {
+      // Direct format
+      sku = req.body?.sku || req.query?.sku;
+      issue = req.body?.issue || req.query?.issue;
+    }
+    
+    if (!issue) {
+      return res.status(400).json({ error: 'Issue description required' });
+    }
+    
+    const result = await searchTroubleshooting(sku, issue);
+    return res.json({ success: true, result });
+    
+  } catch (error) {
+    console.error('Troubleshoot error:', error);
+    return res.status(500).json({ error: error.message });
+  }
+}
 
-  const { sku, model, issue, problem } = req.method === 'POST' ? req.body : req.query;
-  const productQuery = sku || model;
-  const issueQuery = issue || problem;
+async function searchTroubleshooting(sku, issue) {
+  const issueWords = issue.toLowerCase().split(/\s+/);
   
-  if (!productQuery) {
-    return res.status(400).json({ error: 'Missing sku or model parameter' });
+  // Find product if SKU provided
+  let productId = null;
+  let productInfo = null;
+  
+  if (sku) {
+    const { data: product } = await supabase
+      .from('products')
+      .select('id, sku, model, full_name')
+      .eq('sku', sku)
+      .single();
+    
+    if (product) {
+      productId = product.id;
+      productInfo = product;
+    }
   }
   
-  const product = findProduct(productQuery);
-  if (!product) {
-    return res.status(404).json({ error: 'Product not found', query: productQuery });
+  // Search troubleshooting entries
+  let query = supabase
+    .from('troubleshooting')
+    .select(`
+      id, issue, symptoms, causes_solutions, category, severity,
+      products(sku, model, full_name)
+    `)
+    .eq('approved', true);
+  
+  if (productId) {
+    query = query.eq('product_id', productId);
   }
   
-  if (!issueQuery) {
-    // Return all troubleshooting for product
-    return res.json({
-      product: product.product?.model,
-      troubleshooting: product.troubleshooting || []
-    });
-  }
+  const { data: entries, error } = await query;
   
-  const results = searchTroubleshooting(product, issueQuery);
+  if (error) throw error;
   
-  if (results.length === 0) {
-    return res.json({
-      product: product.product?.model,
-      issue: issueQuery,
-      message: "No specific troubleshooting found. Here are general tips:",
-      troubleshooting: product.troubleshooting || [],
-      support: product.support
-    });
-  }
-  
-  return res.json({
-    product: product.product?.model,
-    issue: issueQuery,
-    troubleshooting: results,
-    support: product.support
+  // Score and rank results
+  const scored = entries.map(entry => {
+    let score = 0;
+    const entryIssue = entry.issue?.toLowerCase() || '';
+    const symptoms = entry.symptoms?.toLowerCase() || '';
+    
+    for (const word of issueWords) {
+      if (entryIssue.includes(word)) score += 10;
+      if (symptoms.includes(word)) score += 5;
+    }
+    
+    // Exact match bonus
+    if (entryIssue.includes(issue.toLowerCase())) score += 20;
+    
+    return { ...entry, score };
   });
+  
+  // Sort by score and take top results
+  const topResults = scored
+    .filter(e => e.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+  
+  if (topResults.length === 0) {
+    return `No troubleshooting entries found for "${issue}". Please describe the issue differently or contact Sonance support at (949) 492-7777.`;
+  }
+  
+  // Format response for voice
+  let response = '';
+  
+  if (productInfo) {
+    response += `For the ${productInfo.model}:\n\n`;
+  }
+  
+  topResults.forEach((entry, i) => {
+    response += `Issue: ${entry.issue}\n`;
+    if (entry.symptoms) response += `Symptoms: ${entry.symptoms}\n`;
+    
+    const solutions = entry.causes_solutions || [];
+    solutions.forEach((cs, j) => {
+      response += `\nCause ${j + 1}: ${cs.cause}\n`;
+      response += `Solution: ${cs.solution}\n`;
+    });
+    response += '\n---\n';
+  });
+  
+  response += `\nFor further assistance, contact Sonance support at (949) 492-7777.`;
+  
+  return response;
 }

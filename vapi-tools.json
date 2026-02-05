@@ -1,0 +1,96 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "get_product_info",
+      "description": "Get detailed information about a Sonance product including specs, features, and documentation links. Use when customer mentions a product name or SKU.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Product model name or SKU (e.g., 'UA 2-125 ARC', '93548')"
+          }
+        },
+        "required": ["model"]
+      }
+    },
+    "server": {
+      "url": "https://sonance-tech-support.vercel.app/api/products"
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "troubleshoot_issue",
+      "description": "Get troubleshooting steps for a product issue. Use when customer describes a problem like no audio, no power, flashing lights, etc.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "Product SKU number (e.g., '93548')"
+          },
+          "issue": {
+            "type": "string",
+            "description": "Description of the problem (e.g., 'no audio from speakers', 'red flashing light', 'won't turn on')"
+          }
+        },
+        "required": ["sku", "issue"]
+      }
+    },
+    "server": {
+      "url": "https://sonance-tech-support.vercel.app/api/troubleshoot",
+      "method": "POST"
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "answer_faq",
+      "description": "Search FAQs to answer common product questions. Use for general questions about features, compatibility, warranty, etc.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "Product SKU number (e.g., '93548')"
+          },
+          "question": {
+            "type": "string",
+            "description": "The customer's question (e.g., 'what is power sharing mode', 'does it support Dolby')"
+          }
+        },
+        "required": ["sku", "question"]
+      }
+    },
+    "server": {
+      "url": "https://sonance-tech-support.vercel.app/api/faq",
+      "method": "POST"
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_installation_guide",
+      "description": "Get installation and setup instructions for a product. Use when customer needs help with setup, mounting, wiring, or app configuration.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "Product SKU number (e.g., '93548')"
+          },
+          "topic": {
+            "type": "string",
+            "description": "Installation topic (e.g., 'hdmi', 'app setup', 'mounting', 'speaker wiring', 'power sharing')"
+          }
+        },
+        "required": ["sku", "topic"]
+      }
+    },
+    "server": {
+      "url": "https://sonance-tech-support.vercel.app/api/install"
+    }
+  }
+]

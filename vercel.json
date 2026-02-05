@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "env": {
+    "SUPABASE_URL": "@supabase-tech-support-url",
+    "SUPABASE_SERVICE_KEY": "@supabase-tech-support-service-key"
+  }
+}
