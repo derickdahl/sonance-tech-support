@@ -1,14 +1,5 @@
 {
   "name": "sonance-tech-support",
   "version": "1.0.0",
-  "description": "Sonance Technical Support API for voice assistants",
-  "type": "module",
-  "engines": {
-    "node": ">=18"
-  },
-  "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'No build step required'",
-    "start": "node server/index.js"
-  }
+  "type": "module"
 }
